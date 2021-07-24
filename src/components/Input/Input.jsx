@@ -6,16 +6,24 @@ export default function Input(props) {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
 
+  const reg = new RegExp("^[^s]+$");
+
   const handlePressed = (e) => {
-    if (message.length > 0 && e.key === "Enter") {
-      dispatch(addTask(new Date().getTime(), message, false));
-      setMessage("");
+    if (e.key === "Enter") {
+      if (!reg.test(message) && message.length > 0) {
+        dispatch(addTask(new Date().getTime(), message, false));
+        setMessage("");
+      } else {
+        setMessage("");
+      }
     }
   };
 
   const handleClick = () => {
-    if (message.length > 0) {
-      addTask(new Date().getTime(), message, false);
+    if (!reg.test(message) && message.length > 0) {
+      dispatch(addTask(new Date().getTime(), message, false));
+      setMessage("");
+    } else {
       setMessage("");
     }
   };
