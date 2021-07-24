@@ -1,11 +1,19 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { removeTask } from "../../redux/actions/actionCreator";
 
 export default function Task(props) {
+  const dispatch = useDispatch();
+
+  const [id, setId] = useState(props.id);
   const [text, setText] = useState(props.text);
   const [isCompleted, setCompleted] = useState(props.isCompleted);
   const [isEditable, setEditable] = useState(false);
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    dispatch(removeTask(id));
+  };
 
   return (
     <li className="task">
@@ -22,10 +30,12 @@ export default function Task(props) {
           className="todoList__todoText"
           onDoubleClick={() => setEditable(true)}
         >
-          {props.text}
+          {text}
         </div>
       )}
-      <button className="todoList__deleteBtn button">X</button>
+      <button onClick={handleDelete} className="todoList__deleteBtn button">
+        X
+      </button>
     </li>
   );
 }
