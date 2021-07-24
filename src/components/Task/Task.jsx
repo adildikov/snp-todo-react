@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { removeTask } from "../../redux/actions/actionCreator";
+import { completeTask, removeTask } from "../../redux/actions/actionCreator";
 
 export default function Task(props) {
   const dispatch = useDispatch();
@@ -15,13 +15,18 @@ export default function Task(props) {
     dispatch(removeTask(id));
   };
 
+  const handleCompleteChange = () => {
+    dispatch(completeTask(id));
+    setCompleted(!isCompleted);
+  };
+
   return (
     <li className="task">
       <input
         type="checkbox"
         className="todoList__checkbox"
         checked={isCompleted}
-        onChange={() => setCompleted(!isCompleted)}
+        onChange={handleCompleteChange}
       />
       {isEditable ? (
         <input type="text" className="todotxt_edit" />
