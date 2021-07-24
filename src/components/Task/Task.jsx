@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function Task(props) {
   const [text, setText] = useState(props.text);
-  const [isComplete, setComplete] = useState(props.isComplete);
+  const [isCompleted, setCompleted] = useState(props.isCompleted);
   const [isEditable, setEditable] = useState(false);
 
   const handleDelete = () => {};
@@ -12,8 +12,8 @@ export default function Task(props) {
       <input
         type="checkbox"
         className="todoList__checkbox"
-        checked={isComplete}
-        onChange={() => setComplete(!isComplete)}
+        checked={isCompleted}
+        onChange={() => setCompleted(!isCompleted)}
       />
       {isEditable ? (
         <input type="text" className="todotxt_edit" />

@@ -4,21 +4,21 @@ const TASKS = [
   {
     id: 1,
     text: "Test1",
-    isComplete: true,
+    isCompleted: true,
   },
   {
     id: 2,
     text: "Test2",
-    isComplete: false,
+    isCompleted: false,
   },
   {
     id: 3,
     text: "Test3",
-    isComplete: true,
+    isCompleted: true,
   },
 ];
 
-const tasks = (state = TASKS, { id, text, isComplete, type }) => {
+const tasks = (state = TASKS, { id, text, isCompleted, type }) => {
   switch (type) {
     case ADD_TASK:
       return [
@@ -26,7 +26,7 @@ const tasks = (state = TASKS, { id, text, isComplete, type }) => {
         {
           id,
           text,
-          isComplete,
+          isCompleted,
         },
       ];
     default:
