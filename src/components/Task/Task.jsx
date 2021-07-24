@@ -35,6 +35,15 @@ export default function Task(props) {
     }
   };
 
+  const handleEditOnBlur = () => {
+    setEditable(false);
+    if (text) {
+      dispatch(editTask(id, text));
+    } else {
+      dispatch(removeTask(id));
+    }
+  };
+
   return (
     <li className="task">
       <input
@@ -50,6 +59,7 @@ export default function Task(props) {
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyPress={(e) => handleEdit(e)}
+          onBlur={handleEditOnBlur}
         />
       ) : (
         <div
