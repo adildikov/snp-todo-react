@@ -1,4 +1,4 @@
-import { ADD_TASK, COMPLETE_TASK, REMOVE_TASK } from "../constants";
+import { ADD_TASK, COMPLETE_TASK, EDIT_TASK, REMOVE_TASK } from "../constants";
 
 const initialState = [
   {
@@ -18,7 +18,10 @@ const initialState = [
   },
 ];
 
-const tasks = (state = initialState, { id, text, isCompleted, type }) => {
+const tasks = (
+  state = initialState,
+  { id, text, isCompleted, type, newText }
+) => {
   switch (type) {
     case ADD_TASK:
       return [
@@ -35,6 +38,13 @@ const tasks = (state = initialState, { id, text, isCompleted, type }) => {
       return [...state].map((task) => {
         if (task.id === id) {
           task.isCompleted = !task.isCompleted;
+        }
+        return task;
+      });
+    case EDIT_TASK:
+      return [...state].map((task) => {
+        if (task.id === id) {
+          task.text = newText;
         }
         return task;
       });

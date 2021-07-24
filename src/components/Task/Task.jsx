@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { completeTask, removeTask } from "../../redux/actions/actionCreator";
+import {
+  completeTask,
+  editTask,
+  removeTask,
+} from "../../redux/actions/actionCreator";
 
 export default function Task(props) {
   const dispatch = useDispatch();
@@ -20,6 +24,17 @@ export default function Task(props) {
     setCompleted(!isCompleted);
   };
 
+  const handleEdit = (e) => {
+    if (e.key === "Enter") {
+      setEditable(false);
+      if (text) {
+        dispatch(editTask(id, text));
+      } else {
+        dispatch(removeTask(id));
+      }
+    }
+  };
+
   return (
     <li className="task">
       <input
@@ -29,7 +44,13 @@ export default function Task(props) {
         onChange={handleCompleteChange}
       />
       {isEditable ? (
-        <input type="text" className="todotxt_edit" />
+        <input
+          type="text"
+          className="todotxt_edit"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onKeyPress={(e) => handleEdit(e)}
+        />
       ) : (
         <div
           className="todoList__todoText"
