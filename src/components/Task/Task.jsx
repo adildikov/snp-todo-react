@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createRef, useLayoutEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import {
@@ -9,6 +9,7 @@ import {
 
 export default function Task(props) {
   const dispatch = useDispatch();
+  const inputRef = createRef();
 
   const [id, setId] = useState(props.id);
   const [text, setText] = useState(props.text);
@@ -44,6 +45,12 @@ export default function Task(props) {
     }
   };
 
+  useLayoutEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [inputRef]);
+
   return (
     <li className="task">
       <input
@@ -56,6 +63,7 @@ export default function Task(props) {
         <input
           type="text"
           className="todotxt_edit"
+          ref={inputRef}
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyPress={(e) => handleEdit(e)}
