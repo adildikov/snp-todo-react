@@ -1,18 +1,23 @@
 import React, { useState } from "react";
+import { connect, useDispatch } from "react-redux";
+import { addTask } from "../../redux/actions/actionCreator";
 
 export default function Input(props) {
+  const dispatch = useDispatch();
   const [message, setMessage] = useState("");
 
   const handlePressed = (e) => {
-    if (e.key === "Enter") {
-      console.log(message);
+    if (message.length > 0 && e.key === "Enter") {
+      dispatch(addTask(new Date().getTime(), message, false));
       setMessage("");
     }
   };
 
   const handleClick = () => {
-    console.log(message);
-    setMessage("");
+    if (message.length > 0) {
+      addTask(new Date().getTime(), message, false);
+      setMessage("");
+    }
   };
 
   return (

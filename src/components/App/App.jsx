@@ -1,19 +1,15 @@
 import React from "react";
 import Input from "../Input";
-import Task from "../Task";
 import Title from "../Title";
+import TodoList from "../TodoList";
 
 export default function App() {
   return (
-    <div class="wrapper">
+    <div className="wrapper">
       <Title title="Todo List" />
       <main>
         <Input />
-        <ul>
-          <Task />
-          <Task />
-          <Task />
-        </ul>
+        <TodoList />
       </main>
     </div>
   );
