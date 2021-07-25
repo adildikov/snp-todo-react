@@ -22,7 +22,11 @@ function App({ tasks, filter }) {
       <Title title="Todo List" />
       <main>
         <Input />
-        <Filters tasks={filteredTasks(tasks, filter)} filter={filter} />
+        <Filters
+          tasks={filteredTasks(tasks, filter)}
+          allTasks={tasks}
+          filter={filter}
+        />
         <TodoList tasks={filteredTasks(tasks, filter)} />
       </main>
     </div>

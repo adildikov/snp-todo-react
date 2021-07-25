@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import {
   completeAll,
@@ -6,13 +6,20 @@ import {
   editFilter,
 } from "../../redux/actions/actionCreator";
 
-export default function Filters({ tasks, filter }) {
+export default function Filters({ tasks, allTasks, filter }) {
   const dispatch = useDispatch();
 
-  const [crnFilter, setCrnFilter] = useState(filter);
+  const countActiveTasks = () => {
+    let counter = 0;
+    allTasks.forEach((task) => {
+      if (!task.isCompleted) {
+        counter += 1;
+      }
+    });
+    return counter;
+  };
 
   const filterClickHandler = (filter) => {
-    setCrnFilter(filter);
     dispatch(editFilter(filter));
   };
 
@@ -60,7 +67,7 @@ export default function Filters({ tasks, filter }) {
       >
         Delete completed
       </button>
-      <div className="counter">Tasks left: {tasks.length}</div>
+      <div className="counter">Tasks left: {countActiveTasks()}</div>
     </div>
   );
 }
