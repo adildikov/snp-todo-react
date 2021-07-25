@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Task from "../Task";
 
-function TodoList({ tasks }) {
+export default function TodoList({ tasks }) {
   return (
     <ul className="main_todoList">
       {tasks.map((task) => (
@@ -17,7 +17,3 @@ function TodoList({ tasks }) {
     </ul>
   );
 }
-
-export default connect((state) => ({
-  tasks: state.tasks,
-}))(TodoList);

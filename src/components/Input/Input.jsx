@@ -10,7 +10,7 @@ export default function Input(props) {
 
   const handlePressed = (e) => {
     if (e.key === "Enter") {
-      if (!reg.test(message) && message.length > 0) {
+      if (message.trim()) {
         dispatch(addTask(new Date().getTime(), message, false));
         setMessage("");
       } else {
@@ -20,7 +20,7 @@ export default function Input(props) {
   };
 
   const handleClick = () => {
-    if (!reg.test(message) && message.length > 0) {
+    if (message.trim()) {
       dispatch(addTask(new Date().getTime(), message, false));
       setMessage("");
     } else {
