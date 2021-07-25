@@ -11,7 +11,7 @@ export default function Task(props) {
   const dispatch = useDispatch();
   const inputRef = createRef();
 
-  const [id, setId] = useState(props.id);
+  const id = props.id;
   const [text, setText] = useState(props.text);
   const [isCompleted, setCompleted] = useState(props.isCompleted);
   const [isEditable, setEditable] = useState(false);

@@ -1,4 +1,10 @@
-import { ADD_TASK, COMPLETE_TASK, EDIT_TASK, REMOVE_TASK } from "../constants";
+import {
+  ADD_TASK,
+  COMPLETE_TASK,
+  EDIT_FILTER,
+  EDIT_TASK,
+  REMOVE_TASK,
+} from "../constants";
 
 export const addTask = (id, text, isCompleted) => ({
   type: ADD_TASK,
@@ -21,4 +27,11 @@ export const editTask = (id, newText) => ({
   type: EDIT_TASK,
   id,
   newText,
+});
+
+//FILTERS
+
+export const editFilter = (crnFilter) => ({
+  type: EDIT_FILTER,
+  crnFilter,
 });

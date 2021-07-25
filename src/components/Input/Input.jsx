@@ -6,8 +6,6 @@ export default function Input(props) {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
 
-  const reg = new RegExp("^[^s]+$");
-
   const handlePressed = (e) => {
     if (e.key === "Enter") {
       if (message.trim()) {

@@ -1,16 +1,46 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { editFilter } from "../../redux/actions/actionCreator";
 
-export default function Filters({ tasks }) {
-  const [crnFilter, setCrnFilter] = useState("all");
+export default function Filters({ tasks, filter }) {
+  const dispatch = useDispatch();
+
+  const [crnFilter, setCrnFilter] = useState(filter);
+
+  const handlerClick = (filter) => {
+    setCrnFilter(filter);
+    dispatch(editFilter(filter));
+  };
 
   return (
-    <div class="main_filter">
-      <button class="filter__completeAll button">Check all ✓</button>
-      <button class="filter__all button current_filter">All</button>
-      <button class="filter__active button">Active</button>
-      <button class="filter__completed button">Completed</button>
-      <button class="filter__deleteCompleted button">Delete completed</button>
-      <div class="counter"></div>
+    <div className="main_filter">
+      <button className="filter__completeAll button">Check all ✓</button>
+      <button
+        onClick={() => handlerClick("all")}
+        className={`filter__all button ${filter === "all" && "current_filter"}`}
+      >
+        All
+      </button>
+      <button
+        onClick={() => handlerClick("active")}
+        className={`filter__active button ${
+          filter === "active" && "current_filter"
+        }`}
+      >
+        Active
+      </button>
+      <button
+        onClick={() => handlerClick("completed")}
+        className={`filter__completed button ${
+          filter === "completed" && "current_filter"
+        }`}
+      >
+        Completed
+      </button>
+      <button className="filter__deleteCompleted button">
+        Delete completed
+      </button>
+      <div className="counter">Tasks left: {tasks.length}</div>
     </div>
   );
 }
