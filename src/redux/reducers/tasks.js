@@ -1,4 +1,11 @@
-import { ADD_TASK, COMPLETE_TASK, EDIT_TASK, REMOVE_TASK } from "../constants";
+import {
+  ADD_TASK,
+  COMPLETE_ALL,
+  COMPLETE_TASK,
+  DELETE_COMPLETED,
+  EDIT_TASK,
+  REMOVE_TASK,
+} from "../constants";
 
 const initialState = [
   {
@@ -48,6 +55,21 @@ const tasks = (
         }
         return task;
       });
+
+    case COMPLETE_ALL:
+      if (state.some((task) => !task.isCompleted)) {
+        return [...state].map((task) => {
+          task.isCompleted = true;
+          return task;
+        });
+      } else {
+        return [...state].map((task) => {
+          task.isCompleted = false;
+          return task;
+        });
+      }
+    case DELETE_COMPLETED:
+      return [...state].filter((task) => !task.isCompleted);
     default:
       return state;
   }

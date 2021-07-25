@@ -9,7 +9,7 @@ export default function TodoList({ tasks }) {
         <Task
           id={task.id}
           key={task.id}
-          text={task.text}
+          BDText={task.text}
           isCompleted={task.isCompleted}
         />
       ))}

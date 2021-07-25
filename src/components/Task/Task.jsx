@@ -7,13 +7,11 @@ import {
   removeTask,
 } from "../../redux/actions/actionCreator";
 
-export default function Task(props) {
+export default function Task({ id, isCompleted, BDText }) {
   const dispatch = useDispatch();
   const inputRef = createRef();
 
-  const id = props.id;
-  const [text, setText] = useState(props.text);
-  const [isCompleted, setCompleted] = useState(props.isCompleted);
+  const [text, setText] = useState(BDText);
   const [isEditable, setEditable] = useState(false);
 
   const handleDelete = () => {
@@ -22,7 +20,6 @@ export default function Task(props) {
 
   const handleCompleteChange = () => {
     dispatch(completeTask(id));
-    setCompleted(!isCompleted);
   };
 
   const handleEdit = (e) => {

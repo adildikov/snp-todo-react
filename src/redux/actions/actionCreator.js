@@ -1,6 +1,8 @@
 import {
   ADD_TASK,
+  COMPLETE_ALL,
   COMPLETE_TASK,
+  DELETE_COMPLETED,
   EDIT_FILTER,
   EDIT_TASK,
   REMOVE_TASK,
@@ -27,6 +29,14 @@ export const editTask = (id, newText) => ({
   type: EDIT_TASK,
   id,
   newText,
+});
+
+export const completeAll = () => ({
+  type: COMPLETE_ALL,
+});
+
+export const deleteCompleted = () => ({
+  type: DELETE_COMPLETED,
 });
 
 //FILTERS
