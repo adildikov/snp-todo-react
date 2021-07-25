@@ -11,11 +11,13 @@ export default function Filters({ tasks, allTasks, filter }) {
 
   const countActiveTasks = () => {
     let counter = 0;
-    allTasks.forEach((task) => {
-      if (!task.isCompleted) {
-        counter += 1;
-      }
-    });
+    if (allTasks) {
+      allTasks.forEach((task) => {
+        if (!task.isCompleted) {
+          counter += 1;
+        }
+      });
+    }
     return counter;
   };
 

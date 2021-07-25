@@ -6,27 +6,24 @@ import {
   EDIT_TASK,
   REMOVE_TASK,
 } from "../constants";
+import { load } from "redux-localstorage-simple";
 
-const initialState = [
-  {
-    id: 1,
-    text: "Test1",
-    isCompleted: false,
-  },
-  {
-    id: 2,
-    text: "Test2",
-    isCompleted: false,
-  },
-  {
-    id: 3,
-    text: "Test3",
-    isCompleted: false,
-  },
-];
+let initialState = load({ namespace: "todos" });
+
+if (
+  initialState === undefined ||
+  initialState === null ||
+  initialState === {} ||
+  !initialState.tasks ||
+  !initialState.tasks.length
+) {
+  initialState = {
+    tasks: [],
+  };
+}
 
 const tasks = (
-  state = initialState,
+  state = initialState.tasks,
   { id, text, isCompleted, type, newText }
 ) => {
   switch (type) {
