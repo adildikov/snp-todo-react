@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import Filters from "../../components/Filters";
@@ -8,7 +8,7 @@ import {
   editFilter,
 } from "../../redux/actions/actionCreator";
 
-export default function FiltersContainer({ allTasks, filter }) {
+export default React.memo(function FiltersContainer({ allTasks, filter }) {
   const dispatch = useDispatch();
 
   const countActiveTasks = useMemo(() => {
@@ -23,23 +23,25 @@ export default function FiltersContainer({ allTasks, filter }) {
     return counter;
   }, [allTasks]);
 
-  const filterClickAllHandler = () => {
+  const filterClickAllHandler = useCallback(() => {
     dispatch(editFilter("all"));
-  };
-  const filterClickActiveHandler = () => {
+  }, [dispatch]);
+
+  const filterClickActiveHandler = useCallback(() => {
     dispatch(editFilter("active"));
-  };
-  const filterClickCompletedHandler = () => {
+  }, [dispatch]);
+
+  const filterClickCompletedHandler = useCallback(() => {
     dispatch(editFilter("completed"));
-  };
+  }, [dispatch]);
 
-  const completeAllHandler = () => {
+  const completeAllHandler = useCallback(() => {
     dispatch(completeAll());
-  };
+  }, [dispatch]);
 
-  const deleteCompletedHandler = () => {
+  const deleteCompletedHandler = useCallback(() => {
     dispatch(deleteCompleted());
-  };
+  }, [dispatch]);
 
   return (
     <Filters
@@ -52,4 +54,4 @@ export default function FiltersContainer({ allTasks, filter }) {
       activeTasksAmount={countActiveTasks}
     />
   );
-}
+});

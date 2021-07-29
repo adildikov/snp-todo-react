@@ -32,4 +32,4 @@ function ToDo({ tasks, filter }) {
 export default connect(({ tasks, filter }) => ({
   tasks,
   filter,
-}))(ToDo);
+}))(React.memo(ToDo));

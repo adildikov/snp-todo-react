@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Filters({
+export default React.memo(function Filters({
   completeAllHandler,
   filter,
   deleteCompletedHandler,
@@ -48,4 +48,4 @@ export default function Filters({
       <div className="counter">Tasks left: {activeTasksAmount}</div>
     </div>
   );
-}
+});

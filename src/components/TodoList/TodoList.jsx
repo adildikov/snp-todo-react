@@ -1,7 +1,7 @@
 import React from "react";
 import TaskContainer from "../../containers/task/task";
 
-export default function TodoList({ tasks }) {
+export default React.memo(function TodoList({ tasks }) {
   return (
     <ul className="main_todoList">
       {tasks.map((task) => (
@@ -14,4 +14,4 @@ export default function TodoList({ tasks }) {
       ))}
     </ul>
   );
-}
+});

@@ -1,4 +1,5 @@
 import React, { createRef, useLayoutEffect, useState } from "react";
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import Task from "../../components/Task";
 
@@ -8,40 +9,43 @@ import {
   removeTask,
 } from "../../redux/actions/actionCreator";
 
-export default function TaskContainer({ id, isCompleted, BDText }) {
+export default React.memo(function TaskContainer({ id, isCompleted, BDText }) {
   const dispatch = useDispatch();
   const inputRef = createRef();
 
   const [text, setText] = useState(BDText);
   const [isEditable, setEditable] = useState(false);
 
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
     dispatch(removeTask(id));
-  };
+  }, [dispatch, id]);
 
-  const handleCompleteChange = () => {
+  const handleCompleteChange = useCallback(() => {
     dispatch(completeTask(id));
-  };
+  }, [dispatch, id]);
 
-  const handleEdit = (e) => {
-    if (e.key === "Enter") {
-      setEditable(false);
-      if (text) {
-        dispatch(editTask(id, text));
-      } else {
-        dispatch(removeTask(id));
+  const handleEdit = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        setEditable(false);
+        if (text) {
+          dispatch(editTask(id, text));
+        } else {
+          dispatch(removeTask(id));
+        }
       }
-    }
-  };
+    },
+    [dispatch, id, text]
+  );
 
-  const handleEditOnBlur = () => {
+  const handleEditOnBlur = useCallback(() => {
     setEditable(false);
     if (text) {
       dispatch(editTask(id, text));
     } else {
       dispatch(removeTask(id));
     }
-  };
+  }, [dispatch, id, text]);
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -71,4 +75,4 @@ export default function TaskContainer({ id, isCompleted, BDText }) {
       handleDelete={handleDelete}
     />
   );
-}
+});

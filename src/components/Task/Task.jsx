@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Task({
+export default React.memo(function Task({
   text,
   isCompleted,
   isEditable,
@@ -40,4 +40,4 @@ export default function Task({
       </button>
     </li>
   );
-}
+});

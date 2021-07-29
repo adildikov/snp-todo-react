@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Input({
+export default React.memo(function Input({
   message,
   handlePressed,
   handleClick,
@@ -21,4 +21,4 @@ export default function Input({
       </button>
     </div>
   );
-}
+});
