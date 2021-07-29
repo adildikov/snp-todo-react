@@ -1,12 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import TodoList from "../../components/TodoList";
+import { getFilter, getTasks } from "../../redux/selectors";
 import FiltersContainer from "../filters/filters";
 import InputContainer from "../input/input";
 
 export default function ToDo() {
-  const tasks = useSelector((state) => state.tasks);
-  const filter = useSelector((state) => state.filter);
+  const tasks = useSelector(getTasks);
+  const filter = useSelector(getFilter);
 
   const filteredTasks = (tasks, filter) => {
     switch (filter) {
