@@ -1,4 +1,5 @@
 import React from "react";
+import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import Filters from "../../components/Filters";
 import {
@@ -10,7 +11,7 @@ import {
 export default function FiltersContainer({ allTasks, filter }) {
   const dispatch = useDispatch();
 
-  const countActiveTasks = () => {
+  const countActiveTasks = useMemo(() => {
     let counter = 0;
     if (allTasks) {
       allTasks.forEach((task) => {
@@ -20,7 +21,7 @@ export default function FiltersContainer({ allTasks, filter }) {
       });
     }
     return counter;
-  };
+  }, [allTasks]);
 
   const filterClickAllHandler = () => {
     dispatch(editFilter("all"));
@@ -48,7 +49,7 @@ export default function FiltersContainer({ allTasks, filter }) {
       filterClickAllHandler={filterClickAllHandler}
       filterClickActiveHandler={filterClickActiveHandler}
       filterClickCompletedHandler={filterClickCompletedHandler}
-      activeTasksAmount={() => countActiveTasks()}
+      activeTasksAmount={countActiveTasks}
     />
   );
 }

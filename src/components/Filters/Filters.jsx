@@ -45,7 +45,7 @@ export default function Filters({
       >
         Delete completed
       </button>
-      <div className="counter">Tasks left: {activeTasksAmount()}</div>
+      <div className="counter">Tasks left: {activeTasksAmount}</div>
     </div>
   );
 }
