@@ -1,31 +1,11 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addTask } from "../../redux/actions/actionCreator";
+import React from "react";
 
-export default function Input(props) {
-  const dispatch = useDispatch();
-  const [message, setMessage] = useState("");
-
-  const handlePressed = (e) => {
-    if (e.key === "Enter") {
-      if (message.trim()) {
-        dispatch(addTask(new Date().getTime(), message, false));
-        setMessage("");
-      } else {
-        setMessage("");
-      }
-    }
-  };
-
-  const handleClick = () => {
-    if (message.trim()) {
-      dispatch(addTask(new Date().getTime(), message, false));
-      setMessage("");
-    } else {
-      setMessage("");
-    }
-  };
-
+export default function Input({
+  message,
+  handlePressed,
+  handleClick,
+  handleChange,
+}) {
   return (
     <div className="main_addTodoArea">
       <input
@@ -33,8 +13,8 @@ export default function Input(props) {
         value={message}
         className="addTodoArea__newTodo"
         placeholder="Add a new case"
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyPress={(e) => handlePressed(e)}
+        onChange={handleChange}
+        onKeyPress={handlePressed}
       />
       <button className="addTodoArea__addTodo button" onClick={handleClick}>
         Add

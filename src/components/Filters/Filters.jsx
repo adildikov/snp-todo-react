@@ -1,38 +1,14 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import {
-  completeAll,
-  deleteCompleted,
-  editFilter,
-} from "../../redux/actions/actionCreator";
 
-export default function Filters({ tasks, allTasks, filter }) {
-  const dispatch = useDispatch();
-
-  const countActiveTasks = () => {
-    let counter = 0;
-    if (allTasks) {
-      allTasks.forEach((task) => {
-        if (!task.isCompleted) {
-          counter += 1;
-        }
-      });
-    }
-    return counter;
-  };
-
-  const filterClickHandler = (filter) => {
-    dispatch(editFilter(filter));
-  };
-
-  const completeAllHandler = () => {
-    dispatch(completeAll());
-  };
-
-  const deleteCompletedHandler = () => {
-    dispatch(deleteCompleted());
-  };
-
+export default function Filters({
+  completeAllHandler,
+  filter,
+  deleteCompletedHandler,
+  filterClickAllHandler,
+  filterClickActiveHandler,
+  filterClickCompletedHandler,
+  activeTasksAmount,
+}) {
   return (
     <div className="main_filter">
       <button
@@ -42,13 +18,13 @@ export default function Filters({ tasks, allTasks, filter }) {
         Check all ✓
       </button>
       <button
-        onClick={() => filterClickHandler("all")}
+        onClick={filterClickAllHandler}
         className={`filter__all button ${filter === "all" && "current_filter"}`}
       >
         All
       </button>
       <button
-        onClick={() => filterClickHandler("active")}
+        onClick={filterClickActiveHandler}
         className={`filter__active button ${
           filter === "active" && "current_filter"
         }`}
@@ -56,7 +32,7 @@ export default function Filters({ tasks, allTasks, filter }) {
         Active
       </button>
       <button
-        onClick={() => filterClickHandler("completed")}
+        onClick={filterClickCompletedHandler}
         className={`filter__completed button ${
           filter === "completed" && "current_filter"
         }`}
@@ -69,7 +45,7 @@ export default function Filters({ tasks, allTasks, filter }) {
       >
         Delete completed
       </button>
-      <div className="counter">Tasks left: {countActiveTasks()}</div>
+      <div className="counter">Tasks left: {activeTasksAmount}</div>
     </div>
   );
 }

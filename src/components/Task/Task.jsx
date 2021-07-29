@@ -1,53 +1,17 @@
-import React, { createRef, useLayoutEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 
-import {
-  completeTask,
-  editTask,
-  removeTask,
-} from "../../redux/actions/actionCreator";
-
-export default function Task({ id, isCompleted, BDText }) {
-  const dispatch = useDispatch();
-  const inputRef = createRef();
-
-  const [text, setText] = useState(BDText);
-  const [isEditable, setEditable] = useState(false);
-
-  const handleDelete = () => {
-    dispatch(removeTask(id));
-  };
-
-  const handleCompleteChange = () => {
-    dispatch(completeTask(id));
-  };
-
-  const handleEdit = (e) => {
-    if (e.key === "Enter") {
-      setEditable(false);
-      if (text) {
-        dispatch(editTask(id, text));
-      } else {
-        dispatch(removeTask(id));
-      }
-    }
-  };
-
-  const handleEditOnBlur = () => {
-    setEditable(false);
-    if (text) {
-      dispatch(editTask(id, text));
-    } else {
-      dispatch(removeTask(id));
-    }
-  };
-
-  useLayoutEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [inputRef]);
-
+export default function Task({
+  text,
+  isCompleted,
+  isEditable,
+  handleCompleteChange,
+  handleChange,
+  handleEdit,
+  handleEditOnBlur,
+  setEditHandle,
+  inputRef,
+  handleDelete,
+}) {
   return (
     <li className="task">
       <input
@@ -62,15 +26,12 @@ export default function Task({ id, isCompleted, BDText }) {
           className="todotxt_edit"
           ref={inputRef}
           value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyPress={(e) => handleEdit(e)}
+          onChange={handleChange}
+          onKeyPress={handleEdit}
           onBlur={handleEditOnBlur}
         />
       ) : (
-        <div
-          className="todoList__todoText"
-          onDoubleClick={() => setEditable(true)}
-        >
+        <div className="todoList__todoText" onDoubleClick={setEditHandle}>
           {text}
         </div>
       )}

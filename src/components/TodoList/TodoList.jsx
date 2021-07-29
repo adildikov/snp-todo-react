@@ -1,12 +1,11 @@
 import React from "react";
-
-import Task from "../Task";
+import TaskContainer from "../../containers/task/task";
 
 export default function TodoList({ tasks }) {
   return (
     <ul className="main_todoList">
       {tasks.map((task) => (
-        <Task
+        <TaskContainer
           id={task.id}
           key={task.id}
           BDText={task.text}
