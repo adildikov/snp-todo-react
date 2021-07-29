@@ -48,7 +48,7 @@ export default function FiltersContainer({ allTasks, filter }) {
       filterClickAllHandler={filterClickAllHandler}
       filterClickActiveHandler={filterClickActiveHandler}
       filterClickCompletedHandler={filterClickCompletedHandler}
-      activeTasksAmount={countActiveTasks()}
+      activeTasksAmount={() => countActiveTasks()}
     />
   );
 }
