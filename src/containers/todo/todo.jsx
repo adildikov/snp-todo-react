@@ -1,10 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import TodoList from "../../components/TodoList";
 import FiltersContainer from "../filters/filters";
 import InputContainer from "../input/input";
 
-function ToDo({ tasks, filter }) {
+export default function ToDo() {
+  const tasks = useSelector((state) => state.tasks);
+  const filter = useSelector((state) => state.filter);
+
   const filteredTasks = (tasks, filter) => {
     switch (filter) {
       case "active":
@@ -28,8 +31,3 @@ function ToDo({ tasks, filter }) {
     </main>
   );
 }
-
-export default connect(({ tasks, filter }) => ({
-  tasks,
-  filter,
-}))(React.memo(ToDo));
